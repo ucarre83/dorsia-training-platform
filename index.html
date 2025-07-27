@@ -7,28 +7,73 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold-color: #c5a67a;
+            --dark-gray: #4a4a4a;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --green-light: #d4edda;
+            --green-border: #c3e6cb;
+            --red-light: #f8d7da;
+            --red-border: #f5c6cb;
+            --blue-light: #d1ecf1;
+            --blue-border: #bee5eb;
+        }
+        
         body {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
         }
+        
         .slide {
             min-height: 100vh;
+            scroll-snap-align: start;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            position: relative;
+            border-bottom: 1px solid #e0e0e0;
         }
+        
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .slide-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        
         .card {
-            background: rgba(248, 249, 250, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--white);
             border-radius: 16px;
+            padding: 3rem;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(197, 166, 122, 0.2);
+            margin: 2rem auto;
+            max-width: 1000px;
         }
+        
         .nav-button {
             position: fixed;
             right: 2rem;
             z-index: 50;
-            background: #c5a67a;
+            background: var(--gold-color);
             color: white;
             border: none;
             border-radius: 50%;
@@ -40,64 +85,328 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 16px rgba(197, 166, 122, 0.3);
+            font-size: 1.2rem;
         }
+        
         .nav-button:hover {
             background: #b8956a;
             transform: scale(1.1);
         }
+        
         .nav-up {
             top: 2rem;
         }
+        
         .nav-down {
             bottom: 2rem;
         }
-        .treatment-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .treatment-card:hover {
-            transform: translateY(-4px);
-        }
-        .tab-button {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            border: 2px solid #c5a67a;
-            background: transparent;
-            color: #c5a67a;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .tab-button.active {
-            background: #c5a67a;
-            color: white;
-        }
-        .simulator-card {
-            background: linear-gradient(135deg, #c5a67a 0%, #d4b88a 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 1rem;
-            box-shadow: 0 8px 32px rgba(197, 166, 122, 0.3);
-        }
+        
         .progress-bar {
             position: fixed;
             top: 0;
             left: 0;
             height: 4px;
-            background: #c5a67a;
+            background: var(--gold-color);
             transition: width 0.3s ease;
             z-index: 100;
         }
+        
         .slide-indicator {
             position: fixed;
             left: 2rem;
             top: 50%;
             transform: translateY(-50%);
             z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(197, 166, 122, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator-dot.active {
+            background: var(--gold-color);
+            transform: scale(1.2);
+        }
+        
+        /* Títulos y texto */
+        h1 {
+            color: var(--dark-gray);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            color: var(--dark-gray);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            color: var(--gold-color);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            color: var(--dark-gray);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        
+        .subtitle {
+            color: var(--gold-color);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+        
+        .description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        /* Cajas de contenido */
+        .content-box {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--gold-color);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+        
+        .positive-box {
+            background: var(--green-light);
+            border: 1px solid var(--green-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .negative-box {
+            background: var(--red-light);
+            border: 1px solid var(--red-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .info-box {
+            background: var(--blue-light);
+            border: 1px solid var(--blue-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .quote-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--gold-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--dark-gray);
+        }
+        
+        /* Iconos y elementos visuales */
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gold-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(197, 166, 122, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Simuladores */
+        .simulator-card {
+            background: linear-gradient(135deg, var(--gold-color) 0%, #d4b88a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(197, 166, 122, 0.3);
+        }
+        
+        .simulator-content {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Botones */
+        .btn-primary {
+            background: var(--gold-color);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-primary:hover {
+            background: #b8956a;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold-color);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            border: 2px solid var(--gold-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gold-color);
+            color: white;
+        }
+        
+        /* Tratamientos */
+        .treatment-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid var(--gold-color);
+            background: transparent;
+            color: var(--gold-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-button.active {
+            background: var(--gold-color);
+            color: white;
+        }
+        
+        .treatment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .treatment-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(197, 166, 122, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .treatment-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* Formularios */
+        textarea, input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--gold-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 2rem 1rem;
+            }
+            
+            .card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-button {
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1rem;
+            }
+            
+            .slide-indicator {
+                left: 1rem;
+            }
+        }
+    </style>
         }
         .slide-dot {
             width: 12px;
@@ -134,61 +443,46 @@
     <div class="slide-indicator" id="slideIndicator"></div>
 
     <!-- Slide 1: Portada -->
-    <section class="slide bg-gradient-to-br from-gray-50 to-gray-100" id="slide-1">
-        <div class="card p-12 text-center max-w-4xl mx-4">
-            <div class="mb-8">
-                <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-                    <span class="text-white font-bold text-2xl">D</span>
-                </div>
-                <h1 class="text-5xl font-bold text-gray-800 mb-4">Plataforma de Formación</h1>
-                <h2 class="text-3xl font-semibold text-yellow-600 mb-6">Gestores Personales del Paciente</h2>
-                <p class="text-xl text-gray-600 mb-8">Clínicas Dorsia - Excelencia en Atención al Cliente</p>
-            </div>
-            <div class="bg-yellow-50 p-6 rounded-lg">
-                <p class="text-lg text-gray-700">Bienvenido a tu formación integral como Gestor Personal del Paciente. Aquí aprenderás las técnicas, protocolos y herramientas necesarias para brindar una atención excepcional.</p>
+    <section class="slide" id="slide-1">
+        <div class="slide-content">
+            <div class="card">
+                <div class="subtitle">WM CLINICS</div>
+                <h1>Curso de Formación Avanzado</h1>
+                <h3>Atención Telefónica de Excelencia</h3>
+                <p class="description">Una plataforma de capacitación integral e interactiva para dominar el arte de la comunicación y la atención al paciente.</p>
             </div>
         </div>
     </section>
 
     <!-- Slide 2: Módulo 1 - Filosofía -->
-    <section class="slide bg-gradient-to-br from-blue-50 to-indigo-50" id="slide-2">
-        <div class="card p-10 max-w-6xl mx-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 1: Filosofía del Gestor Personal</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-yellow-600 mb-4">Transformación del Rol</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                            <span class="line-through text-gray-500">Teleoperador</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                            <span class="font-semibold text-green-600">Gestor Personal del Paciente</span>
-                        </div>
+    <section class="slide" id="slide-2">
+        <div class="slide-content">
+            <div class="card">
+                <h3>Módulo 1: Nuestra Filosofía</h3>
+                <h2>De Teleoperador a Gestor Personal del Paciente</h2>
+                
+                <p class="description">Abandonamos el concepto de "call center". Tú eres el <strong>Gestor Personal</strong> de cada paciente. Este enfoque humaniza la atención, ofrece un servicio exclusivo y establece un vínculo de confianza. Psicológicamente, el paciente experimenta una sensación de exclusividad y acompañamiento, lo que genera mayor confianza y compromiso.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon-circle">👤</div>
+                        <h4>Diferenciación</h4>
+                        <p>Posicionamos el servicio como exclusivo y personalizado.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-circle">🤝</div>
+                        <h4>Confianza</h4>
+                        <p>El paciente tiene un contacto de referencia directo en la clínica.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-circle">❤️</div>
+                        <h4>Fidelización</h4>
+                        <p>Se crea un vínculo fuerte que reduce cancelaciones y aumenta la asistencia.</p>
                     </div>
                 </div>
-
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-yellow-600 mb-4">Beneficios del Cambio</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-start space-x-2">
-                            <span class="text-yellow-500">✓</span>
-                            <span>Diferenciación del servicio</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-yellow-500">✓</span>
-                            <span>Confianza desde la primera llamada</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-yellow-500">✓</span>
-                            <span>Mayor fidelización</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <span class="text-yellow-500">✓</span>
-                            <span>Sensación de exclusividad</span>
-                        </li>
+            </div>
+        </div>
+    </section>
                     </ul>
                 </div>
             </div>
@@ -214,243 +508,108 @@
     </section>
 
     <!-- Slide 3: Módulo 1 - Lenguaje y Actitud -->
-    <section class="slide bg-gradient-to-br from-green-50 to-emerald-50" id="slide-3">
-        <div class="card p-10 max-w-6xl mx-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 1: Lenguaje y Actitud</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Características Positivas -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-green-600 mb-6 flex items-center">
-                        <span class="text-green-500 mr-2">✓</span>
-                        Características Positivas
-                    </h3>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">😊</div>
-                            <span class="text-sm font-medium">Sonrisa Telefónica</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">🤝</div>
-                            <span class="text-sm font-medium">Cercanía</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">👂</div>
-                            <span class="text-sm font-medium">Escucha Activa</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">❤️</div>
-                            <span class="text-sm font-medium">Empatía</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">👔</div>
-                            <span class="text-sm font-medium">Profesionalidad</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">⭐</div>
-                            <span class="text-sm font-medium">Positivismo</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">💡</div>
-                            <span class="text-sm font-medium">Claridad</span>
-                        </div>
-                        <div class="bg-green-50 p-3 rounded-lg text-center">
-                            <div class="text-2xl mb-1">🎯</div>
-                            <span class="text-sm font-medium">Confianza</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Negatividades Fuera -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-red-600 mb-6 flex items-center">
-                        <span class="text-red-500 mr-2">✗</span>
-                        Negatividades Fuera
-                    </h3>
-                    
-                    <div class="space-y-4">
-                        <div class="bg-red-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-red-700 mb-2">Palabras Negativas:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"No"</span>
-                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Problema"</span>
-                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Nunca"</span>
-                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Siempre"</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-orange-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-orange-700 mb-2">Generan Desconfianza:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Gratis"</span>
-                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Garantizado"</span>
-                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Solo por hoy"</span>
-                            </div>
-                        </div>
-
-                        <div class="bg-yellow-50 p-4 rounded-lg">
-                            <h4 class="font-semibold text-yellow-700 mb-2">Sugieren Duda:</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"Creo que"</span>
-                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"Tal vez"</span>
-                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"No estoy seguro"</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 4: Módulo 2 - Primer Contacto (Formularios Web) -->
-    <section class="slide bg-gradient-to-br from-purple-50 to-pink-50" id="slide-4">
-        <div class="card p-10 max-w-6xl mx-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 2: Primer Contacto - Formularios Web</h2>
-            
-            <div class="bg-white p-8 rounded-lg shadow-md">
-                <h3 class="text-2xl font-semibold text-purple-600 mb-6">Guión Completo para Leads de Formularios</h3>
+    <section class="slide" id="slide-3">
+        <div class="slide-content">
+            <div class="card">
+                <h3>Módulo 1: Nuestra Filosofía</h3>
+                <h2>Lenguaje y Actitud de Excelencia</h2>
                 
-                <div class="space-y-6">
-                    <div class="bg-purple-50 p-6 rounded-lg">
-                        <h4 class="font-semibold text-purple-700 mb-3 flex items-center">
-                            <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">1</span>
-                            Inicio
-                        </h4>
-                        <div class="bg-white p-4 rounded border-l-4 border-purple-500">
-                            <p class="italic">"Hola, <strong>(nombre del paciente)</strong>. Soy <strong>(tu nombre)</strong> de Clínicas Dorsia / Origen <strong>(Ubicación)</strong>. He visto que te has interesado en <strong>(tratamiento específico)</strong>"</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
-                            <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">2</span>
-                            Desarrollo
-                        </h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start space-x-2">
-                                <span class="text-blue-500 mt-1">•</span>
-                                <span>Confirmar interés en el tratamiento específico</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <span class="text-blue-500 mt-1">•</span>
-                                <span>Recopilar y confirmar datos del paciente</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <span class="text-blue-500 mt-1">•</span>
-                                <span>Agendar cita con especialista</span>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <span class="text-blue-500 mt-1">•</span>
-                                <span>Crear sensación de exclusividad</span>
-                            </li>
+                <p class="description">Tu voz y tus palabras son la herramienta más poderosa. Debemos llevar un ritmo constante, sin correr, prestando la atención que cada paciente merece.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                    <div class="positive-box">
+                        <h4 style="color: #155724; margin-bottom: 1rem;">👍 Características Positivas</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 0.5rem;"><strong>• Sonrisa Telefónica:</strong> Tu voz transmite calidez y amabilidad.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>• Cercanía:</strong> Habla siempre de tú, con naturalidad y empatía.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>• Escucha Activa:</strong> Presta atención a cada detalle y toma notas.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>• Profesionalidad:</strong> Mantén una actitud amable y respetuosa siempre.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>• Positivismo:</strong> Transmite confianza y seguridad.</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>• Claridad:</strong> Explica todo de manera sencilla.</li>
                         </ul>
                     </div>
-
-                    <div class="bg-green-50 p-6 rounded-lg">
-                        <h4 class="font-semibold text-green-700 mb-3 flex items-center">
-                            <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">3</span>
-                            Cierre
-                        </h4>
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <h5 class="font-medium mb-2">Confirmación de Cita:</h5>
-                                <p class="text-sm bg-white p-3 rounded border-l-4 border-green-500">Confirmar día, hora y ubicación de la clínica</p>
-                            </div>
-                            <div>
-                                <h5 class="font-medium mb-2">Seguimiento:</h5>
-                                <p class="text-sm bg-white p-3 rounded border-l-4 border-green-500">Envío de WhatsApp con detalles y ubicación</p>
-                            </div>
+                    
+                    <div class="negative-box">
+                        <h4 style="color: #721c24; margin-bottom: 1rem;">🚫 Negatividades Fuera</h4>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>• Palabras limitantes:</strong> "No", "problema", "nunca", "siempre".
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>• Palabras que generan desconfianza:</strong> "Gratis", "garantizado", "solo por hoy".
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>• Frases que sugieren duda:</strong> "Creo que", "tal vez", "no estoy seguro".
+                        </div>
+                        <div>
+                            <strong>• Expresiones de presión:</strong> "Tiene que", "debe", "es una oportunidad única".
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
-                    <p class="text-sm text-yellow-800"><strong>Recordatorio:</strong> Revisar HAL inmediatamente (máximo 1 hora) y personalizar la llamada con información previa del paciente.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Slide 5: Módulo 2 - Llamadas Entrantes y Objeciones -->
-    <section class="slide bg-gradient-to-br from-indigo-50 to-blue-50" id="slide-5">
-        <div class="card p-10 max-w-6xl mx-4">
-            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 2: Llamadas Entrantes y Objeciones</h2>
-            
-            <div class="space-y-8">
-                <!-- Guión Llamadas Entrantes -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Guión para Llamadas Entrantes</h3>
-                    <div class="bg-indigo-50 p-4 rounded-lg">
-                        <p class="italic text-lg">"Clínicas Dorsia / Origen, buenos días / tardes, te atiende <strong>(nuestro nombre)</strong> ¿En qué te podemos ayudar?"</p>
+    <!-- Slide 4: Módulo 2 - Primer Contacto -->
+    <section class="slide" id="slide-4">
+        <div class="slide-content">
+            <div class="card">
+                <h3>Módulo 2: El Primer Contacto</h3>
+                <h2>Protocolo: Respuesta a Formularios Web</h2>
+                
+                <p class="description"><strong>Objetivo:</strong> Transformar una solicitud en una cita confirmada, mostrando cercanía y transmitiendo confianza. La rapidez es clave: responde de inmediato, nunca en más de 1 hora.</p>
+                
+                <div class="quote-box">
+                    <strong>Inicio:</strong> "Hola, <em>(nombre del paciente)</em>. Soy <em>(tu nombre)</em> de Clínicas Dorsia / Origen <em>(Ubicación)</em>. He visto que te has interesado en <em>(tratamiento específico)</em>. Cuéntame un poco, ¿estás interesado/a en <em>(Tratamiento de solicitud)</em> ¿verdad?"
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Petición de datos y agendamiento:</strong> "Perfecto <em>(Nombre del cliente)</em> pues vamos a confirmar los datos... Bien como te decía voy a agendar tu cita con nuestra/o compañera/o que podrá explicarte todo con detalle. El/La especialista no está siempre en clínica, entonces dime... ¿Qué te viene mejor en horario de tarde o de mañana...?"
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Crear valor:</strong> "Tengo la agenda del compañera/o llena, pero voy a intentar hacerte un hueco entre pacientes. ¿qué tal te viene entonces el día XXXX a las XXXX horas?"
+                </div>
+                
+                <div class="quote-box">
+                    <strong>Confirmación y cierre:</strong> "Perfecto <em>(Nombre paciente)</em> pues te confirmamos que el día XXX a las XXX horas, te estará esperando el/la especialista... ahora te mando un WhatsApp con los detalles de tu cita, incluida nuestra dirección y cómo llegar. ¡Nos vemos pronto!"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Módulo 2 - Manejo de Objeciones -->
+    <section class="slide" id="slide-5">
+        <div class="slide-content">
+            <div class="card">
+                <h3>Módulo 2: El Primer Contacto</h3>
+                <h2>Manejo de Objeciones Avanzadas</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                    <div class="content-box">
+                        <h4>Paciente dice: "He leído opiniones negativas en internet."</h4>
+                        <p><strong>Respuesta:</strong> "Entiendo tu preocupación. En Dorsia realizamos miles de tratamientos cada año con excelentes resultados. Te invito a venir a la consulta para que nos conozcas mejor, veas nuestras instalaciones y resuelvas todas tus dudas en persona sin ningún compromiso."</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>Paciente dice: "Tengo que consultarlo con mi pareja/familia."</h4>
+                        <p><strong>Respuesta:</strong> "Es totalmente comprensible, de hecho, muchos de nuestros pacientes vienen acompañados a la primera consulta para que sus seres queridos también puedan resolver dudas. ¿Te gustaría que agendemos una cita para que vengáis juntos?"</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>Paciente dice: "La cita no es con un médico, solo me vais a vender algo."</h4>
+                        <p><strong>Respuesta:</strong> "Entiendo lo que quieres decir. La primera valoración es con una especialista en nuestros tratamientos, que se forma constantemente para darte la mejor información. Es 100% informativa y sin ninguna presión. Si después de hablar con ella quieres conocer al doctor/a, podemos agendar tu visita un día que esté en la clínica para que te sientas más seguro/a."</p>
+                    </div>
+                    
+                    <div class="content-box">
+                        <h4>Guión para Llamadas Entrantes</h4>
+                        <div class="quote-box">
+                            "Clínicas Dorsia / Origen, buenos días / tardes, te atiende <strong>(nuestro nombre)</strong> ¿En qué te podemos ayudar?"
+                        </div>
                     </div>
                 </div>
-
-                <!-- Manejo de Objeciones -->
-                <div class="bg-white p-8 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Manejo de Objeciones Principales</h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Solicitud de Precios -->
-                        <div class="bg-red-50 p-6 rounded-lg">
-                            <h4 class="font-semibold text-red-700 mb-3 flex items-center">
-                                <span class="text-2xl mr-2">💰</span>
-                                Solicitud de Precios
-                            </h4>
-                            <div class="space-y-3">
-                                <div class="bg-white p-3 rounded border-l-4 border-red-500">
-                                    <p class="text-sm italic">"Lo mejor es que te veas con uno de nuestros especialistas, que podrá explicarte todo con detalle..."</p>
-                                </div>
-                                <div class="space-y-2">
-                                    <p class="font-medium text-sm">Si insiste:</p>
-                                    <div class="bg-yellow-100 p-2 rounded text-xs">
-                                        <strong>Opción A:</strong> Compromiso Dorsia - Igualamos precios
-                                    </div>
-                                    <div class="bg-yellow-100 p-2 rounded text-xs">
-                                        <strong>Opción B:</strong> Promociones limitadas
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Información Procedimientos -->
-                        <div class="bg-blue-50 p-6 rounded-lg">
-                            <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
-                                <span class="text-2xl mr-2">ℹ️</span>
-                                Información Procedimientos
-                            </h4>
-                            <div class="bg-white p-3 rounded border-l-4 border-blue-500">
-                                <p class="text-sm italic">"Es normal que tengas preguntas... yo no soy personal sanitario, será mejor que te cite con mi compañera especialista"</p>
-                            </div>
-                        </div>
-
-                        <!-- Consulta con Pareja -->
-                        <div class="bg-green-50 p-6 rounded-lg">
-                            <h4 class="font-semibold text-green-700 mb-3 flex items-center">
-                                <span class="text-2xl mr-2">👫</span>
-                                Consulta con Pareja
-                            </h4>
-                            <ul class="text-sm space-y-1">
-                                <li>• Validar la decisión</li>
-                                <li>• Ofrecer flexibilidad en fechas</li>
-                                <li>• Mantener el interés</li>
-                                <li>• Sugerir videoconsulta si es necesario</li>
-                            </ul>
-                        </div>
-
-                        <!-- Opiniones Negativas -->
-                        <div class="bg-purple-50 p-6 rounded-lg">
-                            <h4 class="font-semibold text-purple-700 mb-3 flex items-center">
-                                <span class="text-2xl mr-2">💭</span>
-                                Opiniones Negativas
-                            </h4>
-                            <ul class="text-sm space-y-1">
-                                <li>• Reconocer preocupaciones</li>
-                                <li>• Destacar experiencia comprobada</li>
-                                <li>• Mencionar tecnología de vanguardia</li>
-                                <li>• Ofrecer consulta sin compromiso</li>
-                            </ul>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </section>
                 </div>
             </div>
         </div>
