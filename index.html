@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Formación - Clínicas Dorsia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(248, 249, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-button {
+            position: fixed;
+            right: 2rem;
+            z-index: 50;
+            background: #c5a67a;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(197, 166, 122, 0.3);
+        }
+        .nav-button:hover {
+            background: #b8956a;
+            transform: scale(1.1);
+        }
+        .nav-up {
+            top: 2rem;
+        }
+        .nav-down {
+            bottom: 2rem;
+        }
+        .treatment-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .treatment-card:hover {
+            transform: translateY(-4px);
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #c5a67a;
+            background: transparent;
+            color: #c5a67a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background: #c5a67a;
+            color: white;
+        }
+        .simulator-card {
+            background: linear-gradient(135deg, #c5a67a 0%, #d4b88a 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 8px 32px rgba(197, 166, 122, 0.3);
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #c5a67a;
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+        .slide-indicator {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 50;
+        }
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(197, 166, 122, 0.3);
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slide-dot.active {
+            background: #c5a67a;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-700">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Navigation Buttons -->
+    <button class="nav-button nav-up" onclick="previousSlide()">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </button>
+    <button class="nav-button nav-down" onclick="nextSlide()">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+        </svg>
+    </button>
+
+    <!-- Slide Indicators -->
+    <div class="slide-indicator" id="slideIndicator"></div>
+
+    <!-- Slide 1: Portada -->
+    <section class="slide bg-gradient-to-br from-gray-50 to-gray-100" id="slide-1">
+        <div class="card p-12 text-center max-w-4xl mx-4">
+            <div class="mb-8">
+                <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <span class="text-white font-bold text-2xl">D</span>
+                </div>
+                <h1 class="text-5xl font-bold text-gray-800 mb-4">Plataforma de Formación</h1>
+                <h2 class="text-3xl font-semibold text-yellow-600 mb-6">Gestores Personales del Paciente</h2>
+                <p class="text-xl text-gray-600 mb-8">Clínicas Dorsia - Excelencia en Atención al Cliente</p>
+            </div>
+            <div class="bg-yellow-50 p-6 rounded-lg">
+                <p class="text-lg text-gray-700">Bienvenido a tu formación integral como Gestor Personal del Paciente. Aquí aprenderás las técnicas, protocolos y herramientas necesarias para brindar una atención excepcional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Módulo 1 - Filosofía -->
+    <section class="slide bg-gradient-to-br from-blue-50 to-indigo-50" id="slide-2">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 1: Filosofía del Gestor Personal</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-yellow-600 mb-4">Transformación del Rol</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <span class="line-through text-gray-500">Teleoperador</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="font-semibold text-green-600">Gestor Personal del Paciente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-yellow-600 mb-4">Beneficios del Cambio</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-yellow-500">✓</span>
+                            <span>Diferenciación del servicio</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-yellow-500">✓</span>
+                            <span>Confianza desde la primera llamada</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-yellow-500">✓</span>
+                            <span>Mayor fidelización</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-yellow-500">✓</span>
+                            <span>Sensación de exclusividad</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-yellow-50 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Metodología</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">1</div>
+                        <p class="text-sm">Presentarse como Gestor Personal</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">2</div>
+                        <p class="text-sm">Ser contacto directo para consultas</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">3</div>
+                        <p class="text-sm">Mantener disponibilidad durante tratamiento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Módulo 1 - Lenguaje y Actitud -->
+    <section class="slide bg-gradient-to-br from-green-50 to-emerald-50" id="slide-3">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 1: Lenguaje y Actitud</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Características Positivas -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-green-600 mb-6 flex items-center">
+                        <span class="text-green-500 mr-2">✓</span>
+                        Características Positivas
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">😊</div>
+                            <span class="text-sm font-medium">Sonrisa Telefónica</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🤝</div>
+                            <span class="text-sm font-medium">Cercanía</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">👂</div>
+                            <span class="text-sm font-medium">Escucha Activa</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">❤️</div>
+                            <span class="text-sm font-medium">Empatía</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">👔</div>
+                            <span class="text-sm font-medium">Profesionalidad</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">⭐</div>
+                            <span class="text-sm font-medium">Positivismo</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">💡</div>
+                            <span class="text-sm font-medium">Claridad</span>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl mb-1">🎯</div>
+                            <span class="text-sm font-medium">Confianza</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Negatividades Fuera -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-red-600 mb-6 flex items-center">
+                        <span class="text-red-500 mr-2">✗</span>
+                        Negatividades Fuera
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">Palabras Negativas:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"No"</span>
+                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Problema"</span>
+                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Nunca"</span>
+                                <span class="bg-red-200 text-red-800 px-2 py-1 rounded text-sm">"Siempre"</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-2">Generan Desconfianza:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Gratis"</span>
+                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Garantizado"</span>
+                                <span class="bg-orange-200 text-orange-800 px-2 py-1 rounded text-sm">"Solo por hoy"</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-yellow-700 mb-2">Sugieren Duda:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"Creo que"</span>
+                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"Tal vez"</span>
+                                <span class="bg-yellow-200 text-yellow-800 px-2 py-1 rounded text-sm">"No estoy seguro"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Módulo 2 - Primer Contacto (Formularios Web) -->
+    <section class="slide bg-gradient-to-br from-purple-50 to-pink-50" id="slide-4">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 2: Primer Contacto - Formularios Web</h2>
+            
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="text-2xl font-semibold text-purple-600 mb-6">Guión Completo para Leads de Formularios</h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-purple-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 mb-3 flex items-center">
+                            <span class="bg-purple-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">1</span>
+                            Inicio
+                        </h4>
+                        <div class="bg-white p-4 rounded border-l-4 border-purple-500">
+                            <p class="italic">"Hola, <strong>(nombre del paciente)</strong>. Soy <strong>(tu nombre)</strong> de Clínicas Dorsia / Origen <strong>(Ubicación)</strong>. He visto que te has interesado en <strong>(tratamiento específico)</strong>"</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">2</span>
+                            Desarrollo
+                        </h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start space-x-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>Confirmar interés en el tratamiento específico</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>Recopilar y confirmar datos del paciente</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>Agendar cita con especialista</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-blue-500 mt-1">•</span>
+                                <span>Crear sensación de exclusividad</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h4 class="font-semibold text-green-700 mb-3 flex items-center">
+                            <span class="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm mr-2">3</span>
+                            Cierre
+                        </h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h5 class="font-medium mb-2">Confirmación de Cita:</h5>
+                                <p class="text-sm bg-white p-3 rounded border-l-4 border-green-500">Confirmar día, hora y ubicación de la clínica</p>
+                            </div>
+                            <div>
+                                <h5 class="font-medium mb-2">Seguimiento:</h5>
+                                <p class="text-sm bg-white p-3 rounded border-l-4 border-green-500">Envío de WhatsApp con detalles y ubicación</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg">
+                    <p class="text-sm text-yellow-800"><strong>Recordatorio:</strong> Revisar HAL inmediatamente (máximo 1 hora) y personalizar la llamada con información previa del paciente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Módulo 2 - Llamadas Entrantes y Objeciones -->
+    <section class="slide bg-gradient-to-br from-indigo-50 to-blue-50" id="slide-5">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 2: Llamadas Entrantes y Objeciones</h2>
+            
+            <div class="space-y-8">
+                <!-- Guión Llamadas Entrantes -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Guión para Llamadas Entrantes</h3>
+                    <div class="bg-indigo-50 p-4 rounded-lg">
+                        <p class="italic text-lg">"Clínicas Dorsia / Origen, buenos días / tardes, te atiende <strong>(nuestro nombre)</strong> ¿En qué te podemos ayudar?"</p>
+                    </div>
+                </div>
+
+                <!-- Manejo de Objeciones -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6">Manejo de Objeciones Principales</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Solicitud de Precios -->
+                        <div class="bg-red-50 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">💰</span>
+                                Solicitud de Precios
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="bg-white p-3 rounded border-l-4 border-red-500">
+                                    <p class="text-sm italic">"Lo mejor es que te veas con uno de nuestros especialistas, que podrá explicarte todo con detalle..."</p>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="font-medium text-sm">Si insiste:</p>
+                                    <div class="bg-yellow-100 p-2 rounded text-xs">
+                                        <strong>Opción A:</strong> Compromiso Dorsia - Igualamos precios
+                                    </div>
+                                    <div class="bg-yellow-100 p-2 rounded text-xs">
+                                        <strong>Opción B:</strong> Promociones limitadas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información Procedimientos -->
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h4 class="font-semibold text-blue-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">ℹ️</span>
+                                Información Procedimientos
+                            </h4>
+                            <div class="bg-white p-3 rounded border-l-4 border-blue-500">
+                                <p class="text-sm italic">"Es normal que tengas preguntas... yo no soy personal sanitario, será mejor que te cite con mi compañera especialista"</p>
+                            </div>
+                        </div>
+
+                        <!-- Consulta con Pareja -->
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h4 class="font-semibold text-green-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">👫</span>
+                                Consulta con Pareja
+                            </h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Validar la decisión</li>
+                                <li>• Ofrecer flexibilidad en fechas</li>
+                                <li>• Mantener el interés</li>
+                                <li>• Sugerir videoconsulta si es necesario</li>
+                            </ul>
+                        </div>
+
+                        <!-- Opiniones Negativas -->
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <h4 class="font-semibold text-purple-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">💭</span>
+                                Opiniones Negativas
+                            </h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Reconocer preocupaciones</li>
+                                <li>• Destacar experiencia comprobada</li>
+                                <li>• Mencionar tecnología de vanguardia</li>
+                                <li>• Ofrecer consulta sin compromiso</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Módulo 3 - Gestión de Citas -->
+    <section class="slide bg-gradient-to-br from-teal-50 to-cyan-50" id="slide-6">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 3: Gestión de Citas</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Cambios de Cita -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">📅</span>
+                        Cambios de Cita
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-red-700 mb-2">1. Crear Urgencia</h4>
+                            <p class="text-sm italic">"Si no puedes hoy, no podría darte cita hasta dentro de..."</p>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-yellow-700 mb-2">2. Hacer Favor</h4>
+                            <p class="text-sm italic">"Voy a hacerte un hueco en horario propio de personal"</p>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-green-700 mb-2">3. Buscar Complicidad</h4>
+                            <p class="text-sm italic">"Por favor apúntatelo para no anular de nuevo"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestión No Vino -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-orange-600 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">❌</span>
+                        Gestión "No Vino"
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-orange-700 mb-2">Protocolo</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Llamar tras 15 min de la hora</li>
+                                <li>• Mostrar ingenuidad</li>
+                                <li>• Reagendar con comprensión</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-blue-700 mb-2">Frase Clave</h4>
+                            <p class="text-sm italic">"¿Te retrasas mucho...?"</p>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-green-700 mb-2">Seguimiento</h4>
+                            <p class="text-sm">WhatsApp al día siguiente si no se localiza</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Videoconsulta -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">💻</span>
+                        Videoconsulta
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-purple-700 mb-2">Cuándo Ofrecer</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Fechas muy apartadas</li>
+                                <li>• Dificultad de desplazamiento</li>
+                                <li>• Agenda muy apretada</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-blue-700 mb-2">Beneficios</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Sin coste adicional</li>
+                                <li>• No necesita desplazarse</li>
+                                <li>• Misma calidad de consulta</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-green-700 mb-2">Requisitos</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Lugar iluminado</li>
+                                <li>• Tranquilidad para hablar</li>
+                                <li>• Cámara funcional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Módulo 4 - Técnicas Psicológicas -->
+    <section class="slide bg-gradient-to-br from-rose-50 to-pink-50" id="slide-7">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 4: Manejo de Conflictos - Técnicas Psicológicas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Validación Emocional -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-rose-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">❤️</span>
+                        Validación Emocional
+                    </h3>
+                    <p class="text-gray-700 mb-3">Reconocer y validar los sentimientos del paciente para crear conexión emocional.</p>
+                    <div class="bg-rose-50 p-3 rounded">
+                        <p class="text-sm italic">"Entiendo perfectamente tu preocupación, es completamente normal sentirse así..."</p>
+                    </div>
+                </div>
+
+                <!-- Desescalada -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-blue-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">🕊️</span>
+                        Desescalada
+                    </h3>
+                    <p class="text-gray-700 mb-3">Mantener un tono calmado y pausado para reducir la tensión.</p>
+                    <div class="bg-blue-50 p-3 rounded">
+                        <p class="text-sm italic">"Vamos a resolver esto paso a paso, con calma..."</p>
+                    </div>
+                </div>
+
+                <!-- Reenmarcado Cognitivo -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-green-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">🔄</span>
+                        Reenmarcado Cognitivo
+                    </h3>
+                    <p class="text-gray-700 mb-3">Reformular el problema hacia una solución constructiva.</p>
+                    <div class="bg-green-50 p-3 rounded">
+                        <p class="text-sm italic">"Veamos cómo podemos resolver esto juntos de la mejor manera..."</p>
+                    </div>
+                </div>
+
+                <!-- Empatía -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-purple-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">🤝</span>
+                        Empatía
+                    </h3>
+                    <p class="text-gray-700 mb-3">Ponerse en el lugar del paciente para comprender su perspectiva.</p>
+                    <div class="bg-purple-50 p-3 rounded">
+                        <p class="text-sm italic">"Si estuviera en tu situación, también me preocuparía..."</p>
+                    </div>
+                </div>
+
+                <!-- Asertividad -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-orange-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">💪</span>
+                        Asertividad
+                    </h3>
+                    <p class="text-gray-700 mb-3">Comunicar de forma clara y respetuosa manteniendo límites profesionales.</p>
+                    <div class="bg-orange-50 p-3 rounded">
+                        <p class="text-sm italic">"Te propongo que hagamos lo siguiente..."</p>
+                    </div>
+                </div>
+
+                <!-- Cierre Positivo -->
+                <div class="treatment-card">
+                    <h3 class="text-xl font-semibold text-teal-600 mb-3 flex items-center">
+                        <span class="text-2xl mr-2">✨</span>
+                        Cierre Positivo
+                    </h3>
+                    <p class="text-gray-700 mb-3">Terminar la interacción con una nota optimista y próximos pasos claros.</p>
+                    <div class="bg-teal-50 p-3 rounded">
+                        <p class="text-sm italic">"Perfecto, hemos encontrado la solución ideal para ti..."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Módulo 4 - Protocolos de Crisis -->
+    <section class="slide bg-gradient-to-br from-red-50 to-orange-50" id="slide-8">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 4: Protocolos de Crisis</h2>
+            
+            <div class="space-y-6">
+                <!-- Solicitudes de Reembolso -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-red-600 mb-4 flex items-center">
+                        <span class="text-3xl mr-3">💰</span>
+                        Solicitudes de Reembolso
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-700 mb-3">Protocolo de Acción:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-red-500 mt-1">1.</span>
+                                    <span>Escuchar activamente la queja</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-red-500 mt-1">2.</span>
+                                    <span>Tomar nota de todos los detalles</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-red-500 mt-1">3.</span>
+                                    <span>Derivar a calidad@dorsia.es</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-red-500 mt-1">4.</span>
+                                    <span>Incluir en copia a directores</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-2">Contactos Clave:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• calidad@dorsia.es</li>
+                                <li>• Director de clínica</li>
+                                <li>• Área Manager</li>
+                                <li>• uxio.carre@wmclinics.es</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Urgencias Médicas -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-orange-600 mb-4 flex items-center">
+                        <span class="text-3xl mr-3">🚨</span>
+                        Urgencias Médicas
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-orange-700 mb-3">Dentro de Horario:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Derivar inmediatamente a clínica</li>
+                                <li>• Si no responden, tomar datos</li>
+                                <li>• Enviar email urgente</li>
+                                <li>• Informar al paciente del seguimiento</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-red-700 mb-3">Fuera de Horario:</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Preguntar por teléfono de emergencia</li>
+                                <li>• Orientar a urgencias si necesario</li>
+                                <li>• Intentar localizar área manager</li>
+                                <li>• Email con "URGENCIA" en asunto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Protocolo Riesgo Suicida -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-2 border-red-300">
+                    <h3 class="text-2xl font-semibold text-red-700 mb-4 flex items-center">
+                        <span class="text-3xl mr-3">⚠️</span>
+                        Protocolo Riesgo Suicida (Origen)
+                    </h3>
+                    <div class="bg-red-100 p-6 rounded-lg">
+                        <h4 class="font-bold text-red-800 mb-4">PROTOCOLO DE MÁXIMA PRIORIDAD</h4>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-semibold text-red-700 mb-2">Acciones Inmediatas:</h5>
+                                <ol class="text-sm space-y-1">
+                                    <li>1. Recopilar datos básicos del paciente</li>
+                                    <li>2. Solicitar teléfono de familiar/contacto</li>
+                                    <li>3. Derivar inmediatamente al 112</li>
+                                    <li>4. Si cuelga, llamar al 112 con los datos</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-red-700 mb-2">Seguimiento:</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li>• Email urgente a clínica</li>
+                                    <li>• Copia a pilar.conde@clinicasorigen.es</li>
+                                    <li>• Copia a uxio.carre@wmclinics.es</li>
+                                    <li>• Seguimiento posterior desde clínica</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-yellow-100 rounded border-l-4 border-yellow-500">
+                            <p class="text-sm text-yellow-800"><strong>Importante:</strong> En situaciones extremas no se vulnera el derecho de protección de datos del paciente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Módulo 5 - El Arte de Asesorar -->
+    <section class="slide bg-gradient-to-br from-amber-50 to-yellow-50" id="slide-9">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 5: El Arte de Asesorar</h2>
+            
+            <div class="space-y-8">
+                <!-- Beauty Consultants -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-amber-600 mb-4 flex items-center">
+                        <span class="text-3xl mr-3">✨</span>
+                        Beauty Consultants
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-3 flex items-center justify-center text-white text-2xl">👥</div>
+                            <h4 class="font-semibold mb-2">Consultor de Belleza</h4>
+                            <p class="text-sm text-gray-600">Asesoramiento experto y personalizado</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-3 flex items-center justify-center text-white text-2xl">🎯</div>
+                            <h4 class="font-semibold mb-2">Enfoque Personalizado</h4>
+                            <p class="text-sm text-gray-600">Cada paciente es único y especial</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-amber-500 rounded-full mx-auto mb-3 flex items-center justify-center text-white text-2xl">🔍</div>
+                            <h4 class="font-semibold mb-2">Diagnóstico Integral</h4>
+                            <p class="text-sm text-gray-600">Evaluación completa de necesidades</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Diagnóstico 360° -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">🔄</span>
+                        Diagnóstico 360°
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-3">🌟</div>
+                            <h4 class="text-xl font-semibold text-blue-700 mb-3">Calidad de Piel</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Textura y luminosidad</li>
+                                <li>• Nivel de hidratación</li>
+                                <li>• Manchas y uniformidad</li>
+                                <li>• Poros y imperfecciones</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-3">📏</div>
+                            <h4 class="text-xl font-semibold text-green-700 mb-3">Arrugas</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Líneas de expresión</li>
+                                <li>• Arrugas estáticas</li>
+                                <li>• Arrugas dinámicas</li>
+                                <li>• Profundidad y extensión</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-3">📐</div>
+                            <h4 class="text-xl font-semibold text-purple-700 mb-3">Volúmenes</h4>
+                            <ul class="text-sm space-y-1">
+                                <li>• Pérdida de volumen facial</li>
+                                <li>• Definición de contornos</li>
+                                <li>• Proyección de pómulos</li>
+                                <li>• Armonía facial</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Principios de Seguridad -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-green-600 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">🛡️</span>
+                        3 Principios de Seguridad
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">1</div>
+                            <h4 class="text-lg font-semibold mb-2">Evaluación Médica Previa</h4>
+                            <p class="text-sm text-gray-600">Consulta exhaustiva antes de cualquier tratamiento</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">2</div>
+                            <h4 class="text-lg font-semibold mb-2">Tratamientos Personalizados</h4>
+                            <p class="text-sm text-gray-600">Adaptados a las necesidades específicas de cada paciente</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl">3</div>
+                            <h4 class="text-lg font-semibold mb-2">Seguimiento Post-Tratamiento</h4>
+                            <p class="text-sm text-gray-600">Acompañamiento continuo durante todo el proceso</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Módulo 6 - Herramientas y Fidelización -->
+    <section class="slide bg-gradient-to-br from-emerald-50 to-teal-50" id="slide-10">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 6: Herramientas y Fidelización</h2>
+            
+            <div class="space-y-8">
+                <!-- Importancia de HAL -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-emerald-600 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">💻</span>
+                        Importancia de HAL
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-emerald-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-emerald-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">👀</span>
+                                Revisar Antes
+                            </h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-emerald-500 mt-1">•</span>
+                                    <span>Preparar la llamada con información previa</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-emerald-500 mt-1">•</span>
+                                    <span>Revisar historial de solicitudes</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-emerald-500 mt-1">•</span>
+                                    <span>Conocer tratamientos previos</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-emerald-500 mt-1">•</span>
+                                    <span>Personalizar el enfoque</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-teal-50 p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-teal-700 mb-3 flex items-center">
+                                <span class="text-2xl mr-2">✍️</span>
+                                Anotar Durante
+                            </h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-teal-500 mt-1">•</span>
+                                    <span>Registrar todos los detalles relevantes</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-teal-500 mt-1">•</span>
+                                    <span>Campo "Observaciones" es clave</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-teal-500 mt-1">•</span>
+                                    <span>Información para el equipo clínico</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-teal-500 mt-1">•</span>
+                                    <span>Crear "gatillos comerciales"</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programas de Venta Cruzada -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-6 flex items-center">
+                        <span class="text-3xl mr-3">🎯</span>
+                        Programas de Venta Cruzada
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- PRIME -->
+                        <div class="bg-gradient-to-br from-yellow-400 to-yellow-600 p-6 rounded-lg text-white">
+                            <div class="text-center mb-4">
+                                <div class="text-4xl mb-2">👑</div>
+                                <h4 class="text-xl font-bold">PRIME</h4>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Programa de membresía premium</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Beneficios exclusivos</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Descuentos especiales</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Acceso prioritario</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Beauty Coach -->
+                        <div class="bg-gradient-to-br from-pink-400 to-pink-600 p-6 rounded-lg text-white">
+                            <div class="text-center mb-4">
+                                <div class="text-4xl mb-2">💄</div>
+                                <h4 class="text-xl font-bold">Beauty Coach</h4>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Seguimiento personalizado</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Asesoramiento continuo</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Planes de cuidado</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Resultados optimizados</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tarjeta VIP -->
+                        <div class="bg-gradient-to-br from-purple-400 to-purple-600 p-6 rounded-lg text-white">
+                            <div class="text-center mb-4">
+                                <div class="text-4xl mb-2">💳</div>
+                                <h4 class="text-xl font-bold">Tarjeta VIP</h4>
+                            </div>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Promociones especiales</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Atención prioritaria</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Eventos exclusivos</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="mt-1">✓</span>
+                                    <span>Regalos especiales</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Módulo 7 - Catálogo de Tratamientos -->
+    <section class="slide bg-gradient-to-br from-violet-50 to-purple-50" id="slide-11">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Módulo 7: Catálogo de Tratamientos</h2>
+            
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="tab-button active" onclick="showTab('medicina-facial')">Medicina Facial</button>
+                <button class="tab-button" onclick="showTab('medicina-regenerativa')">Medicina Regenerativa</button>
+                <button class="tab-button" onclick="showTab('tratamientos-corporales')">Tratamientos Corporales</button>
+                <button class="tab-button" onclick="showTab('plataformas')">Plataformas</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="medicina-facial" class="tab-content">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Radiofrecuencia Facial -->
+                    <div class="treatment-card">
+                        <h3 class="text-xl font-semibold text-purple-600 mb-3">Radiofrecuencia Facial</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="font-medium text-gray-700">Qué es:</h4>
+                                <p class="text-sm text-gray-600">Tratamiento médico-estético no quirúrgico que estimula la regeneración y producción de colágeno mediante ondas electromagnéticas.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Para qué sirve:</h4>
+                                <p class="text-sm text-gray-600">Redefinición del contorno facial, reducción de arrugas, levantamiento periocular, relleno peribucal.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Beneficios:</h4>
+                                <p class="text-sm text-gray-600">Proceso rápido y cómodo, sin incapacidad laboral, tensado inmediato de fibras de colágeno.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Indicado para:</h4>
+                                <p class="text-sm text-gray-600">Pacientes que quieren mejorar el aspecto de la piel, eventos especiales, resultados sin cirugía.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Peeling Químico -->
+                    <div class="treatment-card">
+                        <h3 class="text-xl font-semibold text-purple-600 mb-3">Peeling Químico</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="font-medium text-gray-700">Qué es:</h4>
+                                <p class="text-sm text-gray-600">Tratamiento que regenera la piel eliminando una capa superficial para permitir su regeneración.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Para qué sirve:</h4>
+                                <p class="text-sm text-gray-600">Estimular rejuvenecimiento facial, estandarizar cutis, cerrar poros, atenuar arrugas superficiales.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Beneficios:</h4>
+                                <p class="text-sm text-gray-600">Mejora luminosidad, reduce poro dilatado, previene envejecimiento cutáneo, puede prevenir cáncer de piel.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Indicado para:</h4>
+                                <p class="text-sm text-gray-600">Falta de luminosidad, poro dilatado, manchas oscuras, cicatrices de acné, arrugas finas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mesoterapia Facial -->
+                    <div class="treatment-card">
+                        <h3 class="text-xl font-semibold text-purple-600 mb-3">Mesoterapia Facial y Cuello</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <h4 class="font-medium text-gray-700">Qué es:</h4>
+                                <p class="text-sm text-gray-600">Microinyecciones en dermis con vitaminas, ácido hialurónico, minerales y aminoácidos.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Para qué sirve:</h4>
+                                <p class="text-sm text-gray-600">Revitalizar, hidratar y rejuvenecer la piel desde el interior, proporcionando aspecto fresco y saludable.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Beneficios:</h4>
+                                <p class="text-sm text-gray-600">Hidratación profunda, rejuvenecimiento, luminosidad, prevención del envejecimiento, reducción de manchas.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700">Indicado para:</h4>
+                                <p class="text-sm text-gray-600">Piel apagada/deshidratada, primeras líneas de expresión, manchas, pieles fatigadas por estrés.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="medicina-regenerativa" class="tab-content hidden">
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">🧬</div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Medicina Regenerativa</h3>
+                    <p class="text-gray-600">Contenido en desarrollo - Información detallada próximamente</p>
+                </div>
+            </div>
+
+            <div id="tratamientos-corporales" class="tab-content hidden">
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">💪</div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Tratamientos Corporales</h3>
+                    <p class="text-gray-600">Contenido en desarrollo - Información detallada próximamente</p>
+                </div>
+            </div>
+
+            <div id="plataformas" class="tab-content hidden">
+                <div class="text-center py-12">
+                    <div class="text-6xl mb-4">⚙️</div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Plataformas Tecnológicas</h3>
+                    <p class="text-gray-600">Contenido en desarrollo - Información detallada próximamente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slides 12-16: Módulos de Práctica con IA -->
+    <section class="slide bg-gradient-to-br from-cyan-50 to-blue-50" id="slide-12">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Simulador de Test de Conocimiento</h2>
+            
+            <div class="simulator-card">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🧠</div>
+                    <h3 class="text-2xl font-bold mb-4">Pon a Prueba tus Conocimientos</h3>
+                    <p class="text-lg opacity-90">Selecciona los tratamientos más adecuados para cada caso clínico</p>
+                </div>
+
+                <div id="knowledge-test" class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <div id="test-case" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Caso Clínico:</h4>
+                        <p id="case-description" class="text-lg mb-4">Cargando caso...</p>
+                    </div>
+
+                    <div id="treatment-options" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Selecciona los tratamientos adecuados:</h4>
+                        <div id="options-container" class="grid md:grid-cols-2 gap-3">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="evaluateKnowledgeTest()" class="bg-white text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Evaluar Respuestas
+                        </button>
+                    </div>
+
+                    <div id="test-feedback" class="mt-6 hidden">
+                        <!-- Feedback will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide bg-gradient-to-br from-green-50 to-emerald-50" id="slide-13">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Simulador de Identificación de Necesidades</h2>
+            
+            <div class="simulator-card bg-gradient-to-br from-green-500 to-emerald-600">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <h3 class="text-2xl font-bold mb-4">Identifica las Necesidades del Paciente</h3>
+                    <p class="text-lg opacity-90">Practica cómo indagar en las necesidades sin proponer tratamientos específicos</p>
+                </div>
+
+                <div id="needs-identification" class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <div id="patient-query" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Consulta del Paciente:</h4>
+                        <div id="patient-message" class="bg-white bg-opacity-30 p-4 rounded-lg text-lg">
+                            Cargando consulta...
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Tu Respuesta:</h4>
+                        <textarea id="agent-response" class="w-full h-32 p-4 rounded-lg border-0 text-gray-800" placeholder="Escribe cómo responderías a esta consulta..."></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="generatePatientQuery()" class="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors mr-4">
+                            🔄 Cambiar Escenario del Paciente
+                        </button>
+                        <button onclick="evaluateNeedsResponse()" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Evaluar Respuesta
+                        </button>
+                    </div>
+
+                    <div id="needs-feedback" class="mt-6 hidden">
+                        <!-- Feedback will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide bg-gradient-to-br from-orange-50 to-red-50" id="slide-14">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Simulador de Venta Cruzada</h2>
+            
+            <div class="simulator-card bg-gradient-to-br from-orange-500 to-red-500">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🎁</div>
+                    <h3 class="text-2xl font-bold mb-4">Practica la Venta Cruzada</h3>
+                    <p class="text-lg opacity-90">Aprende a introducir programas adicionales de forma natural</p>
+                </div>
+
+                <div id="cross-selling" class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <div id="satisfied-patient" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Paciente Satisfecho:</h4>
+                        <div id="satisfaction-message" class="bg-white bg-opacity-30 p-4 rounded-lg text-lg">
+                            Cargando feedback...
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Tu Respuesta de Venta Cruzada:</h4>
+                        <textarea id="cross-sell-response" class="w-full h-32 p-4 rounded-lg border-0 text-gray-800" placeholder="¿Cómo aprovecharías esta oportunidad para introducir PRIME, Beauty Coach o Tarjeta VIP?"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="generateSatisfactionScenario()" class="bg-white text-orange-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors mr-4">
+                            🔄 Cambiar Escenario del Paciente
+                        </button>
+                        <button onclick="evaluateCrossSelling()" class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Evaluar Respuesta
+                        </button>
+                    </div>
+
+                    <div id="cross-sell-feedback" class="mt-6 hidden">
+                        <!-- Feedback will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide bg-gradient-to-br from-red-50 to-pink-50" id="slide-15">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Simulador de Manejo de Conflictos</h2>
+            
+            <div class="simulator-card bg-gradient-to-br from-red-500 to-pink-500">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🛡️</div>
+                    <h3 class="text-2xl font-bold mb-4">Maneja Situaciones Difíciles</h3>
+                    <p class="text-lg opacity-90">Practica las técnicas psicológicas para resolver conflictos</p>
+                </div>
+
+                <div id="conflict-management" class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <div id="angry-patient" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Paciente Enfadado:</h4>
+                        <div id="complaint-message" class="bg-white bg-opacity-30 p-4 rounded-lg text-lg">
+                            Cargando queja...
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Tu Respuesta:</h4>
+                        <textarea id="conflict-response" class="w-full h-32 p-4 rounded-lg border-0 text-gray-800" placeholder="¿Cómo aplicarías las técnicas de validación emocional, desescalada y empatía?"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="generateComplaintScenario()" class="bg-white text-red-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors mr-4">
+                            🔄 Cambiar Escenario del Paciente
+                        </button>
+                        <button onclick="evaluateConflictManagement()" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Evaluar Respuesta
+                        </button>
+                    </div>
+
+                    <div id="conflict-feedback" class="mt-6 hidden">
+                        <!-- Feedback will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide bg-gradient-to-br from-indigo-50 to-purple-50" id="slide-16">
+        <div class="card p-10 max-w-6xl mx-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Simulador de Role-Playing General</h2>
+            
+            <div class="simulator-card bg-gradient-to-br from-indigo-500 to-purple-500">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🎭</div>
+                    <h3 class="text-2xl font-bold mb-4">Práctica Libre</h3>
+                    <p class="text-lg opacity-90">Enfrenta cualquier tipo de consulta u objeción</p>
+                </div>
+
+                <div id="role-playing" class="bg-white bg-opacity-20 p-6 rounded-lg">
+                    <div id="general-query" class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Consulta del Paciente:</h4>
+                        <div id="general-message" class="bg-white bg-opacity-30 p-4 rounded-lg text-lg">
+                            Cargando consulta...
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3">Tu Respuesta:</h4>
+                        <textarea id="roleplay-response" class="w-full h-32 p-4 rounded-lg border-0 text-gray-800" placeholder="Recuerda: el objetivo es siempre agendar una cita de valoración gratuita..."></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="generateGeneralQuery()" class="bg-white text-indigo-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors mr-4">
+                            🔄 Cambiar Escenario del Paciente
+                        </button>
+                        <button onclick="evaluateRolePlay()" class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Evaluar Respuesta
+                        </button>
+                    </div>
+
+                    <div id="roleplay-feedback" class="mt-6 hidden">
+                        <!-- Feedback will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Conclusión -->
+    <section class="slide bg-gradient-to-br from-yellow-50 to-amber-50" id="slide-17">
+        <div class="card p-12 text-center max-w-4xl mx-4">
+            <div class="mb-8">
+                <div class="text-8xl mb-6">🎓</div>
+                <h1 class="text-5xl font-bold text-gray-800 mb-6">¡Felicitaciones!</h1>
+                <h2 class="text-3xl font-semibold text-amber-600 mb-8">Has completado tu formación como Gestor Personal del Paciente</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Ahora estás preparado para:</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <ul class="text-left space-y-2">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Brindar atención excepcional</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Manejar cualquier situación</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Aplicar técnicas psicológicas</span>
+                            </li>
+                        </ul>
+                        <ul class="text-left space-y-2">
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Asesorar sobre tratamientos</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Fidelizar pacientes</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <span class="text-green-500">✓</span>
+                                <span>Representar la excelencia Dorsia</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold text-amber-800 mb-3">Recuerda siempre:</h3>
+                    <p class="text-lg text-amber-700 italic">"Cada paciente es único y merece una atención personalizada y excepcional. Tú eres su primer contacto con la excelencia de Clínicas Dorsia."</p>
+                </div>
+
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <p class="text-gray-600">Para dudas adicionales o consultas, contacta con tu supervisor o el equipo de formación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Global variables
+        let currentSlide = 1;
+        const totalSlides = 17;
+        const GEMINI_API_KEY = 'AIzaSyAAEMp7SI6qCVihTQR5z29hT7J6aps7gJI';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSlideIndicators();
+            updateProgressBar();
+            updateSlideIndicators();
+            
+            // Initialize first knowledge test case
+            generateKnowledgeTestCase();
+            generatePatientQuery();
+            generateSatisfactionScenario();
+            generateComplaintScenario();
+            generateGeneralQuery();
+        });
+
+        // Navigation functions
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                goToSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                goToSlide(currentSlide);
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            currentSlide = slideNumber;
+            document.getElementById(`slide-${slideNumber}`).scrollIntoView({
+                behavior: 'smooth'
+            });
+            updateProgressBar();
+            updateSlideIndicators();
+        }
+
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function initializeSlideIndicators() {
+            const indicator = document.getElementById('slideIndicator');
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'slide-dot';
+                dot.onclick = () => goToSlide(i);
+                indicator.appendChild(dot);
+            }
+        }
+
+        function updateSlideIndicators() {
+            const dots = document.querySelectorAll('.slide-dot');
+            dots.forEach((dot, index) => {
+                if (index + 1 === currentSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Tab functionality for treatment catalog
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Scroll detection for automatic slide updates
+        let isScrolling = false;
+        window.addEventListener('scroll', function() {
+            if (!isScrolling) {
+                window.requestAnimationFrame(function() {
+                    const slides = document.querySelectorAll('.slide');
+                    const scrollPosition = window.scrollY + window.innerHeight / 2;
+                    
+                    slides.forEach((slide, index) => {
+                        const slideTop = slide.offsetTop;
+                        const slideBottom = slideTop + slide.offsetHeight;
+                        
+                        if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                            currentSlide = index + 1;
+                            updateProgressBar();
+                            updateSlideIndicators();
+                        }
+                    });
+                    
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        });
+
+        // AI Simulation Functions
+        async function callGeminiAPI(prompt, responseSchema = null) {
+            try {
+                const requestBody = {
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 1024,
+                    }
+                };
+
+                if (responseSchema) {
+                    requestBody.generationConfig.responseSchema = responseSchema;
+                    requestBody.generationConfig.responseMimeType = "application/json";
+                }
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                return 'Error: No se pudo conectar con el servicio de IA. Por favor, inténtalo de nuevo.';
+            }
+        }
+
+        // Knowledge Test Functions
+        async function generateKnowledgeTestCase() {
+            // Clear previous feedback
+            document.getElementById('test-feedback').classList.add('hidden');
+            
+            // Clear previous selections
+            const checkboxes = document.querySelectorAll('#options-container input[type="checkbox"]');
+            checkboxes.forEach(checkbox => checkbox.checked = false);
+            
+            const prompt = `Eres un formador experto de Clínicas Dorsia. Genera un caso clínico realista para que un agente practique la selección de tratamientos.
+
+Crea un caso con:
+- Descripción del paciente (edad, preocupaciones estéticas específicas, tipo de piel, expectativas)
+- Lista de 6 opciones de tratamiento (incluye al menos 2 correctas)
+- Identifica cuáles son las respuestas correctas
+
+Tratamientos disponibles: Radiofrecuencia Facial, Peeling Químico, Mesoterapia Facial, Botox, Rellenos, Láser CO2, Lifting, Microdermoabrasión, Hilos Tensores, Plasma Rico en Plaquetas
+
+Responde en formato JSON:
+{
+  "description": "descripción del caso",
+  "options": ["opción1", "opción2", "opción3", "opción4", "opción5", "opción6"],
+  "correctAnswers": ["respuesta1", "respuesta2"]
+}`;
+
+            try {
+                const response = await callGeminiAPI(prompt);
+                const caseData = JSON.parse(response);
+                
+                document.getElementById('case-description').textContent = caseData.description;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                
+                caseData.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'flex items-center space-x-2';
+                    optionDiv.innerHTML = `
+                        <input type="checkbox" id="option-${option}" value="${option}" class="rounded">
+                        <label for="option-${option}" class="text-white">${option}</label>
+                    `;
+                    optionsContainer.appendChild(optionDiv);
+                });
+
+                // Store correct answers for evaluation
+                window.currentTestCase = caseData;
+            } catch (error) {
+                console.error('Error generating test case:', error);
+                // Fallback to predefined cases
+                const cases = [
+                    {
+                        description: "Paciente de 45 años que quiere mejorar la luminosidad de su piel y reducir poros dilatados. No tiene arrugas profundas pero sí líneas finas.",
+                        correctAnswers: ["Peeling Químico", "Mesoterapia Facial"],
+                        options: ["Radiofrecuencia Facial", "Peeling Químico", "Mesoterapia Facial", "Botox", "Rellenos", "Láser CO2"]
+                    },
+                    {
+                        description: "Paciente de 35 años con piel deshidratada y primeras líneas de expresión. Busca un tratamiento preventivo sin tiempo de recuperación.",
+                        correctAnswers: ["Mesoterapia Facial", "Radiofrecuencia Facial"],
+                        options: ["Radiofrecuencia Facial", "Peeling Químico", "Mesoterapia Facial", "Lifting", "Botox", "Microdermoabrasión"]
+                    }
+                ];
+
+                const randomCase = cases[Math.floor(Math.random() * cases.length)];
+                
+                document.getElementById('case-description').textContent = randomCase.description;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                
+                randomCase.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'flex items-center space-x-2';
+                    optionDiv.innerHTML = `
+                        <input type="checkbox" id="option-${option}" value="${option}" class="rounded">
+                        <label for="option-${option}" class="text-white">${option}</label>
+                    `;
+                    optionsContainer.appendChild(optionDiv);
+                });
+
+                window.currentTestCase = randomCase;
+            }
+        }
+
+        async function evaluateKnowledgeTest() {
+            const selectedOptions = Array.from(document.querySelectorAll('#options-container input:checked')).map(input => input.value);
+            
+            const prompt = `Eres un formador experto de Clínicas Dorsia. Evalúa la selección de tratamientos de un agente para un caso concreto.
+**Caso:** "${window.currentTestCase.description}"
+**Respuestas Correctas:** [${window.currentTestCase.correctAnswers.map(a => `"${a}"`).join(', ')}]
+**Respuestas Seleccionadas por el Agente:** [${selectedOptions.map(a => `"${a}"`).join(', ')}]
+
+**Tarea:** Proporciona un análisis conciso en castellano. Explica por qué cada opción seleccionada es correcta o incorrecta, y por qué las opciones correctas no seleccionadas deberían haberlo sido, basándote en el propósito de cada tratamiento. Sé didáctico y claro.`;
+
+            const feedback = await callGeminiAPI(prompt);
+            
+            const feedbackDiv = document.getElementById('test-feedback');
+            feedbackDiv.innerHTML = `
+                <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                    <div class="text-sm">${feedback.replace(/\n/g, '<br>')}</div>
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="generateKnowledgeTestCase();" class="bg-blue-500 text-white px-4 py-2 rounded font-semibold hover:bg-blue-600 transition-colors">
+                            🔄 Cambiar Escenario del Paciente
+                        </button>
+                        <button onclick="document.getElementById('test-feedback').classList.add('hidden');" class="bg-white text-amber-600 px-4 py-2 rounded font-semibold hover:bg-gray-100 transition-colors">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            `;
+            feedbackDiv.classList.remove('hidden');
+        }
+
+        // Needs Identification Functions
+        async function generatePatientQuery() {
+            // Clear previous feedback and response
+            document.getElementById('needs-feedback').classList.add('hidden');
+            document.getElementById('agent-response').value = '';
+            
+            const prompt = "Actúa como un paciente de Dorsia. Genera una consulta breve y realista donde expreses un deseo o finalidad, sin nombrar un tratamiento específico. Ejemplo: 'quiero verme menos cansada', 'me gustaría marcar más la mandíbula'. Responde solo con la consulta en castellano.";
+            
+            const query = await callGeminiAPI(prompt);
+            document.getElementById('patient-message').textContent = query;
+        }
+
+        async function evaluateNeedsResponse() {
+            const agentResponse = document.getElementById('agent-response').value;
+            const patientQuery = document.getElementById('patient-message').textContent;
+            
+            if (!agentResponse.trim()) {
+                alert('Por favor, escribe tu respuesta antes de evaluar.');
+                return;
+            }
+
+            const responseSchema = {
+                type: "object",
+                properties: {
+                    strengths: {
+                        type: "array",
+                        items: { type: "string" }
+                    },
+                    improvements: {
+                        type: "array", 
+                        items: { type: "string" }
+                    },
+                    suggested_response: {
+                        type: "string"
+                    }
+                },
+                required: ["strengths", "improvements", "suggested_response"]
+            };
+
+            const prompt = `Eres un coach de formación para Clínicas Dorsia. La tarea del agente es identificar la finalidad del paciente y guiarlo a una cita.
+**Consulta del Paciente:** "${patientQuery}"
+**Respuesta del Agente:** "${agentResponse}"
+**Análisis:** Evalúa si el agente indaga en la necesidad en lugar de proponer un tratamiento, si explica el valor de la consulta con el especialista y si su objetivo es agendar la cita.
+**IMPORTANTE:** Tu análisis y todas tus respuestas deben estar escritas exclusivamente en castellano. Proporciona feedback en el formato JSON especificado.`;
+
+            const feedback = await callGeminiAPI(prompt, responseSchema);
+            
+            try {
+                const feedbackObj = JSON.parse(feedback);
+                displayFeedback('needs-feedback', feedbackObj);
+            } catch (error) {
+                document.getElementById('needs-feedback').innerHTML = `
+                    <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                        <div class="text-sm">${feedback.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+                document.getElementById('needs-feedback').classList.remove('hidden');
+            }
+        }
+
+        // Cross-selling Functions
+        async function generateSatisfactionScenario() {
+            // Clear previous feedback and response
+            document.getElementById('cross-sell-feedback').classList.add('hidden');
+            document.getElementById('cross-sell-response').value = '';
+            
+            const prompt = "Actúa como un paciente de Dorsia que llama para dar feedback positivo tras un tratamiento. Expresa tu satisfacción de forma breve y entusiasta. Ejemplo: '¡Estoy feliz con el resultado de mi tratamiento facial!'. Responde solo con la consulta en castellano.";
+            
+            const scenario = await callGeminiAPI(prompt);
+            document.getElementById('satisfaction-message').textContent = scenario;
+        }
+
+        async function evaluateCrossSelling() {
+            const agentResponse = document.getElementById('cross-sell-response').value;
+            const satisfactionMessage = document.getElementById('satisfaction-message').textContent;
+            
+            if (!agentResponse.trim()) {
+                alert('Por favor, escribe tu respuesta antes de evaluar.');
+                return;
+            }
+
+            const responseSchema = {
+                type: "object",
+                properties: {
+                    strengths: {
+                        type: "array",
+                        items: { type: "string" }
+                    },
+                    improvements: {
+                        type: "array", 
+                        items: { type: "string" }
+                    },
+                    suggested_response: {
+                        type: "string"
+                    }
+                },
+                required: ["strengths", "improvements", "suggested_response"]
+            };
+
+            const prompt = `Eres un coach de formación para Clínicas Dorsia. La tarea del agente es realizar una venta cruzada sutil.
+**Contexto del Paciente:** "${satisfactionMessage}"
+**Respuesta del Agente:** "${agentResponse}"
+**Análisis:** Evalúa si el agente aprovecha la satisfacción del paciente para introducir programas como PRIME, Beauty Coach o la tarjeta VIP, enfocándose en el beneficio y el cuidado continuo. ¿Fue natural o forzado?
+**IMPORTANTE:** Tu análisis y todas tus respuestas deben estar escritas exclusivamente en castellano. Proporciona feedback en el formato JSON especificado.`;
+
+            const feedback = await callGeminiAPI(prompt, responseSchema);
+            
+            try {
+                const feedbackObj = JSON.parse(feedback);
+                displayFeedback('cross-sell-feedback', feedbackObj);
+            } catch (error) {
+                document.getElementById('cross-sell-feedback').innerHTML = `
+                    <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                        <div class="text-sm">${feedback.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+                document.getElementById('cross-sell-feedback').classList.remove('hidden');
+            }
+        }
+
+        // Conflict Management Functions
+        async function generateComplaintScenario() {
+            // Clear previous feedback and response
+            document.getElementById('conflict-feedback').classList.add('hidden');
+            document.getElementById('conflict-response').value = '';
+            
+            const prompt = "Actúa como un paciente de Dorsia enfadado o frustrado. Genera una queja breve pero directa sobre un tratamiento o servicio. Ejemplo: 'La cita que me dieron no aparece en el sistema', 'El resultado no es el que esperaba'. Responde solo con la queja en castellano.";
+            
+            const complaint = await callGeminiAPI(prompt);
+            document.getElementById('complaint-message').textContent = complaint;
+        }
+
+        async function evaluateConflictManagement() {
+            const agentResponse = document.getElementById('conflict-response').value;
+            const complaintMessage = document.getElementById('complaint-message').textContent;
+            
+            if (!agentResponse.trim()) {
+                alert('Por favor, escribe tu respuesta antes de evaluar.');
+                return;
+            }
+
+            const responseSchema = {
+                type: "object",
+                properties: {
+                    strengths: {
+                        type: "array",
+                        items: { type: "string" }
+                    },
+                    improvements: {
+                        type: "array", 
+                        items: { type: "string" }
+                    },
+                    suggested_response: {
+                        type: "string"
+                    }
+                },
+                required: ["strengths", "improvements", "suggested_response"]
+            };
+
+            const prompt = `Eres un coach de formación para Clínicas Dorsia. La tarea del agente es manejar a un paciente enfadado.
+**Queja del Paciente:** "${complaintMessage}"
+**Respuesta del Agente:** "${agentResponse}"
+**Análisis:** Evalúa si el agente aplica las técnicas psicológicas del manual: ¿Valida la emoción del paciente? ¿Mantiene un tono calmado (desescalada)? ¿Se muestra empático? ¿Reformula el problema hacia una solución?
+**IMPORTANTE:** Tu análisis y todas tus respuestas deben estar escritas exclusivamente en castellano. Proporciona feedback en el formato JSON especificado.`;
+
+            const feedback = await callGeminiAPI(prompt, responseSchema);
+            
+            try {
+                const feedbackObj = JSON.parse(feedback);
+                displayFeedback('conflict-feedback', feedbackObj);
+            } catch (error) {
+                document.getElementById('conflict-feedback').innerHTML = `
+                    <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                        <div class="text-sm">${feedback.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+                document.getElementById('conflict-feedback').classList.remove('hidden');
+            }
+        }
+
+        // Role-playing Functions
+        async function generateGeneralQuery() {
+            // Clear previous feedback and response
+            document.getElementById('roleplay-feedback').classList.add('hidden');
+            document.getElementById('roleplay-response').value = '';
+            
+            const prompt = "Actúa como un potencial paciente de una clínica de medicina estética. Formula una pregunta o una objeción realista y concisa para un agente de call center. Sé creativo. Responde solo con la pregunta en castellano.";
+            
+            const query = await callGeminiAPI(prompt);
+            document.getElementById('general-message').textContent = query;
+        }
+
+        async function evaluateRolePlay() {
+            const agentResponse = document.getElementById('roleplay-response').value;
+            const generalMessage = document.getElementById('general-message').textContent;
+            
+            if (!agentResponse.trim()) {
+                alert('Por favor, escribe tu respuesta antes de evaluar.');
+                return;
+            }
+
+            const responseSchema = {
+                type: "object",
+                properties: {
+                    strengths: {
+                        type: "array",
+                        items: { type: "string" }
+                    },
+                    improvements: {
+                        type: "array", 
+                        items: { type: "string" }
+                    },
+                    suggested_response: {
+                        type: "string"
+                    }
+                },
+                required: ["strengths", "improvements", "suggested_response"]
+            };
+
+            const prompt = `Eres un coach experto en formación para agentes de Clínicas Dorsia.
+**PROTOCOLO CLAVE:** El objetivo principal es siempre agendar una cita de valoración gratuita. Nunca dar precios. Enfocarse en el valor y la personalización. Usar un tono cercano y profesional.
+**TAREA:** Evalúa la siguiente interacción.
+**Consulta del Paciente:** "${generalMessage}"
+**Respuesta del Agente:** "${agentResponse}"
+**IMPORTANTE:** Tu análisis y todas tus respuestas deben estar escritas exclusivamente en castellano. Proporciona feedback en el formato JSON especificado.`;
+
+            const feedback = await callGeminiAPI(prompt, responseSchema);
+            
+            try {
+                const feedbackObj = JSON.parse(feedback);
+                displayFeedback('roleplay-feedback', feedbackObj);
+            } catch (error) {
+                document.getElementById('roleplay-feedback').innerHTML = `
+                    <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                        <div class="text-sm">${feedback.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+                document.getElementById('roleplay-feedback').classList.remove('hidden');
+            }
+        }
+
+        // Helper function to display structured feedback
+        function displayFeedback(elementId, feedbackObj) {
+            const feedbackDiv = document.getElementById(elementId);
+            
+            // Determine which scenario generator to use based on elementId
+            let scenarioButton = '';
+            if (elementId === 'needs-feedback') {
+                scenarioButton = `<button onclick="generatePatientQuery();" class="bg-blue-500 text-white px-4 py-2 rounded font-semibold hover:bg-blue-600 transition-colors">
+                    🔄 Cambiar Escenario del Paciente
+                </button>`;
+            } else if (elementId === 'cross-sell-feedback') {
+                scenarioButton = `<button onclick="generateSatisfactionScenario();" class="bg-blue-500 text-white px-4 py-2 rounded font-semibold hover:bg-blue-600 transition-colors">
+                    🔄 Cambiar Escenario del Paciente
+                </button>`;
+            } else if (elementId === 'conflict-feedback') {
+                scenarioButton = `<button onclick="generateComplaintScenario();" class="bg-blue-500 text-white px-4 py-2 rounded font-semibold hover:bg-blue-600 transition-colors">
+                    🔄 Cambiar Escenario del Paciente
+                </button>`;
+            } else if (elementId === 'roleplay-feedback') {
+                scenarioButton = `<button onclick="generateGeneralQuery();" class="bg-blue-500 text-white px-4 py-2 rounded font-semibold hover:bg-blue-600 transition-colors">
+                    🔄 Cambiar Escenario del Paciente
+                </button>`;
+            }
+            
+            feedbackDiv.innerHTML = `
+                <div class="bg-white bg-opacity-30 p-4 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-3">Evaluación:</h4>
+                    
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-green-200 mb-2">Fortalezas:</h5>
+                        <ul class="text-sm space-y-1">
+                            ${feedbackObj.strengths.map(strength => `<li>• ${strength}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-yellow-200 mb-2">Áreas de Mejora:</h5>
+                        <ul class="text-sm space-y-1">
+                            ${feedbackObj.improvements.map(improvement => `<li>• ${improvement}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-blue-200 mb-2">Respuesta Sugerida:</h5>
+                        <p class="text-sm bg-white bg-opacity-20 p-3 rounded italic">${feedbackObj.suggested_response}</p>
+                    </div>
+                    
+                    <div class="flex gap-3 mt-4">
+                        ${scenarioButton}
+                        <button onclick="document.getElementById('${elementId}').classList.add('hidden');" class="bg-white text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-100 transition-colors">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            `;
+            feedbackDiv.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
+
