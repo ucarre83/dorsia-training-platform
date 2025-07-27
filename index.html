@@ -1476,8 +1476,223 @@
         </div>
     </section>
 
-    <!-- Slide 17: Conclusión -->
-    <section class="slide bg-gradient-to-br from-yellow-50 to-amber-50" id="slide-17">
+    <!-- Slide 17: Módulo 7 - Catálogo de Tratamientos -->
+    <section class="slide" id="slide-17">
+        <div class="slide-content">
+            <div class="card">
+                <h3>Módulo 7: Catálogo de Tratamientos</h3>
+                <h2>Conoce Nuestra Carta de Servicios</h2>
+                
+                <p class="description">Como Gestor Personal del Paciente, es fundamental que conozcas todos nuestros tratamientos para poder asesorar correctamente y responder cualquier consulta.</p>
+                
+                <div class="treatment-tabs">
+                    <button class="tab-button active" onclick="showTreatmentCategory('facial')">Medicina Facial</button>
+                    <button class="tab-button" onclick="showTreatmentCategory('regenerativa')">Medicina Regenerativa</button>
+                    <button class="tab-button" onclick="showTreatmentCategory('corporal')">Tratamientos Corporales</button>
+                    <button class="tab-button" onclick="showTreatmentCategory('plataformas')">Plataformas</button>
+                </div>
+
+                <!-- Medicina Facial -->
+                <div id="facial-treatments" class="treatment-category">
+                    <h4 style="color: var(--gold-color); margin-bottom: 1.5rem;">💉 Medicina Facial</h4>
+                    <div class="treatment-grid">
+                        <div class="treatment-card">
+                            <h5><strong>Toxina Botulínica (Botox)</strong></h5>
+                            <p><strong>Indicaciones:</strong> Arrugas de expresión, líneas frontales, patas de gallo, entrecejo</p>
+                            <p><strong>Duración:</strong> 4-6 meses</p>
+                            <p><strong>Beneficios:</strong> Prevención y tratamiento de arrugas dinámicas</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Ácido Hialurónico</strong></h5>
+                            <p><strong>Indicaciones:</strong> Relleno de arrugas, aumento de volumen labial, definición facial</p>
+                            <p><strong>Duración:</strong> 8-18 meses según zona</p>
+                            <p><strong>Beneficios:</strong> Hidratación profunda y restauración de volúmenes</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Hilos Tensores</strong></h5>
+                            <p><strong>Indicaciones:</strong> Flacidez facial, lifting no quirúrgico, definición del óvalo</p>
+                            <p><strong>Duración:</strong> 12-24 meses</p>
+                            <p><strong>Beneficios:</strong> Efecto lifting inmediato y estimulación de colágeno</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Peeling Químico</strong></h5>
+                            <p><strong>Indicaciones:</strong> Manchas, textura irregular, poros dilatados, acné</p>
+                            <p><strong>Tipos:</strong> Superficial, medio, profundo</p>
+                            <p><strong>Beneficios:</strong> Renovación celular y mejora de la calidad de piel</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Mesoterapia Facial</strong></h5>
+                            <p><strong>Indicaciones:</strong> Hidratación, luminosidad, antienvejecimiento</p>
+                            <p><strong>Componentes:</strong> Vitaminas, ácido hialurónico, antioxidantes</p>
+                            <p><strong>Beneficios:</strong> Nutrición profunda y revitalización</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Radiofrecuencia Facial</strong></h5>
+                            <p><strong>Indicaciones:</strong> Flacidez, arrugas, falta de firmeza</p>
+                            <p><strong>Tecnología:</strong> Calor controlado para estimular colágeno</p>
+                            <p><strong>Beneficios:</strong> Tensado y reafirmación progresiva</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medicina Regenerativa -->
+                <div id="regenerativa-treatments" class="treatment-category" style="display: none;">
+                    <h4 style="color: var(--gold-color); margin-bottom: 1.5rem;">🧬 Medicina Regenerativa</h4>
+                    <div class="treatment-grid">
+                        <div class="treatment-card">
+                            <h5><strong>Plasma Rico en Plaquetas (PRP)</strong></h5>
+                            <p><strong>Indicaciones:</strong> Rejuvenecimiento facial, alopecia, cicatrices</p>
+                            <p><strong>Proceso:</strong> Extracción de sangre propia y concentración de plaquetas</p>
+                            <p><strong>Beneficios:</strong> Regeneración natural y estimulación celular</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Factores de Crecimiento</strong></h5>
+                            <p><strong>Indicaciones:</strong> Antienvejecimiento, reparación tisular</p>
+                            <p><strong>Origen:</strong> Proteínas bioactivas naturales</p>
+                            <p><strong>Beneficios:</strong> Regeneración acelerada y mejora de la calidad de piel</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Terapia con Células Madre</strong></h5>
+                            <p><strong>Indicaciones:</strong> Rejuvenecimiento avanzado, reparación profunda</p>
+                            <p><strong>Tecnología:</strong> Células madre autólogas</p>
+                            <p><strong>Beneficios:</strong> Regeneración a nivel celular</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Exosomas</strong></h5>
+                            <p><strong>Indicaciones:</strong> Antienvejecimiento, comunicación celular</p>
+                            <p><strong>Función:</strong> Vesículas de comunicación intercelular</p>
+                            <p><strong>Beneficios:</strong> Reparación y regeneración optimizada</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Bioestimuladores de Colágeno</strong></h5>
+                            <p><strong>Indicaciones:</strong> Pérdida de volumen, flacidez</p>
+                            <p><strong>Mecanismo:</strong> Estimulación de producción propia de colágeno</p>
+                            <p><strong>Beneficios:</strong> Resultados naturales y duraderos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tratamientos Corporales -->
+                <div id="corporal-treatments" class="treatment-category" style="display: none;">
+                    <h4 style="color: var(--gold-color); margin-bottom: 1.5rem;">🏃‍♀️ Tratamientos Corporales</h4>
+                    <div class="treatment-grid">
+                        <div class="treatment-card">
+                            <h5><strong>Liposucción sin Cirugía</strong></h5>
+                            <p><strong>Indicaciones:</strong> Grasa localizada, remodelación corporal</p>
+                            <p><strong>Tecnologías:</strong> Criolipólisis, ultrasonidos, radiofrecuencia</p>
+                            <p><strong>Beneficios:</strong> Reducción de grasa sin tiempo de baja</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Radiofrecuencia Corporal</strong></h5>
+                            <p><strong>Indicaciones:</strong> Flacidez, celulitis, reafirmación</p>
+                            <p><strong>Zonas:</strong> Abdomen, brazos, piernas, glúteos</p>
+                            <p><strong>Beneficios:</strong> Tensado de piel y mejora de textura</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Mesoterapia Corporal</strong></h5>
+                            <p><strong>Indicaciones:</strong> Celulitis, grasa localizada, flacidez</p>
+                            <p><strong>Componentes:</strong> Lipolíticos, drenantes, reafirmantes</p>
+                            <p><strong>Beneficios:</strong> Remodelación y mejora de la circulación</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Carboxiterapia</strong></h5>
+                            <p><strong>Indicaciones:</strong> Celulitis, estrías, flacidez</p>
+                            <p><strong>Mecanismo:</strong> Inyección de CO2 medicinal</p>
+                            <p><strong>Beneficios:</strong> Mejora de oxigenación y circulación</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Presoterapia</strong></h5>
+                            <p><strong>Indicaciones:</strong> Retención de líquidos, circulación</p>
+                            <p><strong>Tecnología:</strong> Presión neumática secuencial</p>
+                            <p><strong>Beneficios:</strong> Drenaje linfático y relajación</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Ondas de Choque</strong></h5>
+                            <p><strong>Indicaciones:</strong> Celulitis, fibrosis, regeneración</p>
+                            <p><strong>Mecanismo:</strong> Ondas acústicas de alta energía</p>
+                            <p><strong>Beneficios:</strong> Ruptura de fibrosis y estimulación</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plataformas -->
+                <div id="plataformas-treatments" class="treatment-category" style="display: none;">
+                    <h4 style="color: var(--gold-color); margin-bottom: 1.5rem;">⚡ Plataformas Tecnológicas</h4>
+                    <div class="treatment-grid">
+                        <div class="treatment-card">
+                            <h5><strong>Láser CO2 Fraccionado</strong></h5>
+                            <p><strong>Indicaciones:</strong> Arrugas profundas, cicatrices, manchas</p>
+                            <p><strong>Tecnología:</strong> Ablación fraccionada controlada</p>
+                            <p><strong>Beneficios:</strong> Renovación profunda de la piel</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>IPL (Luz Pulsada Intensa)</strong></h5>
+                            <p><strong>Indicaciones:</strong> Manchas, rojeces, depilación</p>
+                            <p><strong>Tecnología:</strong> Espectro de luz amplio</p>
+                            <p><strong>Beneficios:</strong> Tratamiento versátil y no invasivo</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>HIFU (Ultrasonidos Focalizados)</strong></h5>
+                            <p><strong>Indicaciones:</strong> Lifting no quirúrgico, flacidez</p>
+                            <p><strong>Tecnología:</strong> Ultrasonidos de alta intensidad</p>
+                            <p><strong>Beneficios:</strong> Tensado profundo sin cirugía</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Microneedling con Radiofrecuencia</strong></h5>
+                            <p><strong>Indicaciones:</strong> Textura, poros, cicatrices</p>
+                            <p><strong>Tecnología:</strong> Microagujas + energía RF</p>
+                            <p><strong>Beneficios:</strong> Remodelación dérmica profunda</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Criolipólisis</strong></h5>
+                            <p><strong>Indicaciones:</strong> Grasa localizada resistente</p>
+                            <p><strong>Tecnología:</strong> Frío controlado para destruir adipocitos</p>
+                            <p><strong>Beneficios:</strong> Reducción de grasa definitiva</p>
+                        </div>
+                        
+                        <div class="treatment-card">
+                            <h5><strong>Láser Diodo para Depilación</strong></h5>
+                            <p><strong>Indicaciones:</strong> Eliminación permanente del vello</p>
+                            <p><strong>Tecnología:</strong> Láser de diodo de última generación</p>
+                            <p><strong>Beneficios:</strong> Depilación definitiva y segura</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <h4><strong>💡 Consejos para el Asesoramiento:</strong></h4>
+                    <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+                        <li style="margin-bottom: 0.5rem;">• <strong>Escucha activa:</strong> Identifica las necesidades reales del paciente</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Diagnóstico 360°:</strong> Evalúa calidad de piel, arrugas y volúmenes</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Tratamiento personalizado:</strong> Cada paciente es único</li>
+                        <li style="margin-bottom: 0.5rem;">• <strong>Expectativas realistas:</strong> Explica resultados y tiempos</li>
+                        <li>• <strong>Seguimiento:</strong> La relación continúa después del tratamiento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 18: Conclusión -->
+    <section class="slide" id="slide-18">
         <div class="card p-12 text-center max-w-4xl mx-4">
             <div class="mb-8">
                 <div class="text-8xl mb-6">🎓</div>
@@ -1535,7 +1750,7 @@
     <script>
         // Global variables
         let currentSlide = 1;
-        const totalSlides = 17;
+        const totalSlides = 18;
         const GEMINI_API_KEY = 'AIzaSyAAEMp7SI6qCVihTQR5z29hT7J6aps7gJI';
 
         // Initialize the application
@@ -2113,6 +2328,32 @@ Responde en formato JSON:
                 </div>
             `;
             feedbackDiv.classList.remove('hidden');
+        }
+
+        // Treatment category functions
+        function showTreatmentCategory(category) {
+            // Hide all categories
+            const categories = ['facial', 'regenerativa', 'corporal', 'plataformas'];
+            categories.forEach(cat => {
+                const element = document.getElementById(`${cat}-treatments`);
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
+            
+            // Show selected category
+            const selectedElement = document.getElementById(`${category}-treatments`);
+            if (selectedElement) {
+                selectedElement.style.display = 'block';
+            }
+            
+            // Update tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Find and activate the clicked button
+            const clickedButton = event.target;
+            clickedButton.classList.add('active');
         }
     </script>
 </body>
